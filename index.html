@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="StudentLunch FI - student restaurants and daily and weekly menus in Finland.">
+  <title>StudentLunch FI | Student restaurant menus</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#home" aria-label="StudentLunch FI home">
+        <span class="brand-mark">SL</span>
+        <span>StudentLunch <strong>FI</strong></span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="#restaurants">Restaurants</a>
+        <a href="#map">Map</a>
+        <a href="#profile">Profile</a>
+      </nav>
+      <div class="nav-actions">
+        <button id="loginButton" class="button button-small button-outline">Login</button>
+        <button id="logoutButton" class="button button-small hidden">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">STUDENT RESTAURANTS IN FINLAND</p>
+          <h1>Find your lunch.<br><span>Know the menu.</span></h1>
+          <p class="hero-text">Browse student restaurants, check today's menu or the weekly menu, save favourites and find the nearest restaurant.</p>
+          <div class="hero-actions">
+            <a class="button" href="#restaurants">Explore restaurants</a>
+            <button id="locationButton" class="button button-secondary">Find nearest</button>
+          </div>
+          <p id="locationStatus" class="status-text" aria-live="polite"></p>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-top">
+            <span class="live-dot"></span>
+            <span>MENU SERVICE</span>
+          </div>
+          <div class="hero-card-content">
+            <div class="plate-icon" aria-hidden="true">🍽</div>
+            <h2>Daily & weekly menus</h2>
+            <p>Data is loaded from the Metropolia restaurant REST API.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="restaurants" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">DISCOVER</p>
+            <h2>Student restaurants</h2>
+          </div>
+          <p id="restaurantCount" class="count-label">Loading…</p>
+        </div>
+
+        <div class="filters">
+          <label>
+            Search
+            <input id="searchInput" type="search" placeholder="Restaurant name…">
+          </label>
+          <label>
+            City
+            <select id="cityFilter">
+              <option value="">All cities</option>
+            </select>
+          </label>
+          <label>
+            Service provider
+            <select id="providerFilter">
+              <option value="">All providers</option>
+            </select>
+          </label>
+          <label class="checkbox-label">
+            <input id="favoritesOnly" type="checkbox">
+            Favourites only
+          </label>
+        </div>
+
+        <div id="apiNotice" class="notice hidden" role="status"></div>
+        <div id="restaurantList" class="restaurant-grid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="map" class="section section-alt">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">LOCATION</p>
+            <h2>Restaurant map</h2>
+          </div>
+          <p class="muted">Select a restaurant to centre the map.</p>
+        </div>
+        <div class="map-layout">
+          <div id="mapList" class="map-list"></div>
+          <div class="map-frame-wrap">
+            <iframe id="mapFrame"
+              title="OpenStreetMap map"
+              loading="lazy"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=24.85%2C60.15%2C25.15%2C60.25&amp;layer=mapnik">
+            </iframe>
+            <a id="mapExternalLink" class="map-link" href="https://www.openstreetmap.org/" target="_blank" rel="noopener">Open map in OpenStreetMap</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="profile" class="section">
+      <div class="container profile-layout">
+        <div>
+          <p class="eyebrow">YOUR ACCOUNT</p>
+          <h2>Profile & favourites</h2>
+          <p class="muted">Create an account, save favourite restaurants, update your information and add a profile picture. Account data is stored locally in this student project.</p>
+        </div>
+        <div class="profile-card">
+          <div id="profileLoggedOut">
+            <h3>Not logged in</h3>
+            <p>Login or register to manage your profile and favourites.</p>
+            <button class="button" id="profileLoginButton">Login / Register</button>
+          </div>
+
+          <form id="profileForm" class="hidden">
+            <div class="profile-head">
+              <div class="avatar-wrap">
+                <img id="profileImage" class="avatar" alt="Profile picture" src="">
+                <label class="upload-label" for="profilePicture">Change picture</label>
+                <input id="profilePicture" type="file" accept="image/*" class="visually-hidden">
+              </div>
+              <div>
+                <h3 id="profileNameHeading">Profile</h3>
+                <p id="profileEmailHeading" class="muted"></p>
+              </div>
+            </div>
+            <label>Full name<input id="profileName" type="text" required></label>
+            <label>Email<input id="profileEmail" type="email" required></label>
+            <label>City<input id="profileCity" type="text" placeholder="Helsinki"></label>
+            <button class="button" type="submit">Save profile</button>
+            <p id="profileStatus" class="status-text" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand"><span class="brand-mark">SL</span><span>StudentLunch <strong>FI</strong></span></div>
+        <p>Student restaurant menus in Finland.</p>
+      </div>
+      <div>
+        <h3>Project</h3>
+        <p>Vanilla JavaScript · HTML5 · CSS3 · REST API</p>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>Individual Assignment – Web</span>
+      <span>© 2026 StudentLunch FI</span>
+    </div>
+  </footer>
+
+  <div id="menuModal" class="modal hidden" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="menuTitle">
+      <button class="modal-close" data-close-modal aria-label="Close">×</button>
+      <p class="eyebrow">MENU</p>
+      <h2 id="menuTitle">Restaurant</h2>
+      <div class="menu-tabs">
+        <button class="tab active" data-menu-type="daily">Daily menu</button>
+        <button class="tab" data-menu-type="weekly">Weekly menu</button>
+      </div>
+      <div id="menuContent" class="menu-content"></div>
+    </section>
+  </div>
+
+  <div id="authModal" class="modal hidden" aria-hidden="true">
+    <div class="modal-backdrop" data-close-auth></div>
+    <section class="modal-card auth-card" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+      <button class="modal-close" data-close-auth aria-label="Close">×</button>
+      <div class="auth-tabs">
+        <button class="tab active" data-auth-type="login">Login</button>
+        <button class="tab" data-auth-type="register">Register</button>
+      </div>
+      <h2 id="authTitle">Welcome back</h2>
+      <form id="authForm">
+        <label id="authNameLabel" class="hidden">Full name<input id="authName" type="text"></label>
+        <label>Email<input id="authEmail" type="email" required></label>
+        <label>Password<input id="authPassword" type="password" minlength="6" required></label>
+        <button class="button" type="submit" id="authSubmit">Login</button>
+        <p id="authStatus" class="status-text" aria-live="polite"></p>
+      </form>
+    </section>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
