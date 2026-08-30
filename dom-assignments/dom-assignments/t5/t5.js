@@ -1,4 +1,5 @@
-const restaurants = [
+
+     const restaurants = [ 
   {
     location: {type: 'Point', coordinates: [25.018456, 60.228982]},
     _id: '6470d38ecb12107db6fe24c1',
