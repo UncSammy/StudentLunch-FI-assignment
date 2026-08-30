@@ -6,6 +6,6 @@ body {
 }
 
 #map {
-  height: 50dvh;
-  width: 100dvw;
+  height: 600px;
+  width: 100%;
 }
