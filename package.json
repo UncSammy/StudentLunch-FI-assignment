@@ -1,0 +1,17 @@
+{
+  "name": "studentlunch-fi-assignment",
+  "version": "1.0.0",
+  "description": "Individual Assignment - Web",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
