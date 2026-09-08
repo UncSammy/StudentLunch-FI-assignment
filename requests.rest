@@ -1,0 +1,61 @@
+### Get all cats
+GET http://127.0.0.1:3000/api/v1/cats
+
+###
+
+### Get one cat
+GET http://127.0.0.1:3000/api/v1/cats/1
+
+###
+
+### Add a new cat
+POST http://127.0.0.1:3000/api/v1/cats
+Content-Type: application/json
+
+{
+  "name": "Milo",
+  "birthdate": "2022-01-15",
+  "weight": 4.2,
+  "owner": "Khalid",
+  "image": "https://loremflickr.com/320/240/cat"
+}
+
+###
+
+### Update a cat
+PUT http://127.0.0.1:3000/api/v1/cats/1
+
+###
+
+### Delete a cat
+DELETE http://127.0.0.1:3000/api/v1/cats/1### Get all users
+GET http://127.0.0.1:3000/api/v1/users
+
+###
+
+### Get one user
+GET http://127.0.0.1:3000/api/v1/users/3609
+
+###
+
+### Add a new user
+POST http://127.0.0.1:3000/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Khalid",
+  "username": "khalid",
+  "email": "khalid@metropolia.fi",
+  "role": "user",
+  "password": "password123"
+}
+
+###
+
+### Update a user
+PUT http://127.0.0.1:3000/api/v1/users/3609
+
+###
+
+### Delete a user
+DELETE http://127.0.0.1:3000/api/v1/users/3609
