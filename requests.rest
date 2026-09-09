@@ -8,54 +8,30 @@ GET http://127.0.0.1:3000/api/v1/cats/1
 
 ###
 
-### Add a new cat
+### Add a new cat with image
+
 POST http://127.0.0.1:3000/api/v1/cats
-Content-Type: application/json
+Content-Type: multipart/form-data; boundary=MyBoundary
 
-{
-  "name": "Milo",
-  "birthdate": "2022-01-15",
-  "weight": 4.2,
-  "owner": "Khalid",
-  "image": "https://loremflickr.com/320/240/cat"
-}
+--MyBoundary
+Content-Disposition: form-data; name="name"
 
-###
+Misu
+--MyBoundary
+Content-Disposition: form-data; name="weight"
 
-### Update a cat
-PUT http://127.0.0.1:3000/api/v1/cats/1
+6
+--MyBoundary
+Content-Disposition: form-data; name="owner"
 
-###
+Khalid
+--MyBoundary
+Content-Disposition: form-data; name="birthdate"
 
-### Delete a cat
-DELETE http://127.0.0.1:3000/api/v1/cats/1### Get all users
-GET http://127.0.0.1:3000/api/v1/users
+2023-10-08
+--MyBoundary
+Content-Disposition: form-data; name="cat"; filename="dog.jpg"
+Content-Type: image/jpeg
 
-###
-
-### Get one user
-GET http://127.0.0.1:3000/api/v1/users/3609
-
-###
-
-### Add a new user
-POST http://127.0.0.1:3000/api/v1/users
-Content-Type: application/json
-
-{
-  "name": "Khalid",
-  "username": "khalid",
-  "email": "khalid@metropolia.fi",
-  "role": "user",
-  "password": "password123"
-}
-
-###
-
-### Update a user
-PUT http://127.0.0.1:3000/api/v1/users/3609
-
-###
-
-### Delete a user
-DELETE http://127.0.0.1:3000/api/v1/users/3609
+< ./dog.jpg
+--MyBoundary--

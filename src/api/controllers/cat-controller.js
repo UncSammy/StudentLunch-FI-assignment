@@ -22,10 +22,13 @@ const getCatById = (req, res) => {
 
 
 const createCat = (req, res) => {
-  const newCat = {
-    cat_id: catItems.length + 1,
-    ...req.body,
-  };
+  console.log('Body:', req.body);
+console.log('File:', req.file);
+const newCat = {
+  cat_id: catItems.length + 1,
+  ...req.body,
+  image: req.file.filename,
+};
 
   catItems.push(newCat);
 
