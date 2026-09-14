@@ -1,38 +1,28 @@
+import { useEffect, useState } from 'react';
 import MediaRow from './MediaRow';
-const mediaArray = [
-  {
-    media_id: 1,
-    filename: 'https://picsum.photos/200/150',
-    title: 'Beautiful Nature',
-    description: 'A beautiful nature image.',
-    created: '2026-09-01T10:00:00',
-    filesize: 204800,
-    media_type: 'image',
-  },
-  {
-    media_id: 2,
-    filename: 'https://picsum.photos/201/150',
-    title: 'City View',
-    description: 'A view of a modern city.',
-    created: '2026-09-02T14:30:00',
-    filesize: 512000,
-    media_type: 'image',
-  },
-  {
-    media_id: 3,
-    filename: 'https://picsum.photos/202/150',
-    title: 'Travel Video',
-    description: 'A video from a trip.',
-    created: '2026-09-03T18:00:00',
-    filesize: 1048576,
-    media_type: 'video',
-  },
-];
+import fetchData from '../utils/fetchData';
 
 const Home = () => {
+  const [mediaArray, setMediaArray] = useState([]);
+
+    useEffect(() => {
+    const getMedia = async () => {
+      try {
+        const json = await fetchData('test.json');
+        setMediaArray(json);
+      } catch (error) {
+        console.error('Error fetching media:', error);
+      }
+    };
+
+    getMedia();
+  }, []);
+
+  console.log(mediaArray);
+
   return (
     <>
-      <h2>My Media</h2>
+      <h2>Media</h2>
 
       <table>
         <thead>
@@ -42,14 +32,14 @@ const Home = () => {
             <th>Description</th>
             <th>Created</th>
             <th>Filesize</th>
-            <th>Media Type</th>
+            <th>Media type</th>
           </tr>
         </thead>
 
         <tbody>
           {mediaArray.map((item) => (
-  <MediaRow key={item.media_id} item={item} />
-))}
+            <MediaRow key={item.media_id} item={item} />
+          ))}
         </tbody>
       </table>
     </>
