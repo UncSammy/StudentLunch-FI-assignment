@@ -22,7 +22,7 @@ MediaRow.propTypes = {
     filename: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-   created_at: PropTypes.string.isRequired,
+    created_at: PropTypes.string.isRequired,
     filesize: PropTypes.number.isRequired,
     media_type: PropTypes.string.isRequired,
     username: PropTypes.string.isRequired,

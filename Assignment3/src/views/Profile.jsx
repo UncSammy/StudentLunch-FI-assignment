@@ -1,52 +1,40 @@
-import { useState } from 'react';
-import useAuthentication from '../apiHooks';
+import { useEffect, useState } from 'react';
+import { useUser } from '../hooks/apiHooks';
 
 const Profile = () => {
-  const { postLogin } = useAuthentication();
+  const [user, setUser] = useState(null);
+  const { getUserByToken } = useUser();
 
-  const [inputs, setInputs] = useState({
-    username: '',
-    password: '',
-  });
+  useEffect(() => {
+    const token = localStorage.getItem('token');
 
-  const doLogin = async (event) => {
-    event.preventDefault();
-
-    try {
-      await postLogin(inputs);
-    } catch (error) {
-      console.error(error);
+    if (!token) {
+      return;
     }
-  };
+
+    const getUser = async () => {
+      try {
+        const result = await getUserByToken(token);
+        console.log(result);
+        setUser(result.user);
+      } catch (error) {
+        console.error('Error fetching user:', error);
+      }
+    };
+
+    getUser();
+  }, []);
+
+  if (!user) {
+    return <p>Loading...</p>;
+  }
 
   return (
-    <div>
-      <h2>Login</h2>
-
-      <form onSubmit={doLogin}>
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={inputs.username}
-          onChange={(event) =>
-            setInputs({ ...inputs, username: event.target.value })
-          }
-        />
-
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={inputs.password}
-          onChange={(event) =>
-            setInputs({ ...inputs, password: event.target.value })
-          }
-        />
-
-        <button type="submit">Login</button>
-      </form>
-    </div>
+    <>
+      <h1>Profile</h1>
+      <p>Username: {user.username}</p>
+      <p>Email: {user.email}</p>
+    </>
   );
 };
 
