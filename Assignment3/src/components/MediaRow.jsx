@@ -9,9 +9,10 @@ const MediaRow = (props) => {
       </td>
       <td>{item.title}</td>
       <td>{item.description}</td>
-      <td>{new Date(item.created).toLocaleString('fi-FI')}</td>
+      <td>{new Date(item.created_at).toLocaleString('fi-FI')}</td>
       <td>{item.filesize}</td>
       <td>{item.media_type}</td>
+      <td>{item.username}</td>
     </tr>
  );
 };
@@ -21,9 +22,10 @@ MediaRow.propTypes = {
     filename: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    created: PropTypes.string.isRequired,
+    created_at: PropTypes.string.isRequired,
     filesize: PropTypes.number.isRequired,
     media_type: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
   }).isRequired,
 };
 
