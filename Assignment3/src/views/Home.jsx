@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import MediaRow from './MediaRow';
+import MediaRow from '../components/MediaRow';
 import fetchData from '../utils/fetchData';
 
 const Home = () => {
