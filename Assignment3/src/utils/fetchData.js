@@ -1,5 +1,5 @@
-const fetchData = async (url) => {
-  const response = await fetch(url);
+const fetchData = async (url, options = {}) => {
+  const response = await fetch(url, options);
 
   if (!response.ok) {
     throw new Error(`HTTP error: ${response.status}`);
