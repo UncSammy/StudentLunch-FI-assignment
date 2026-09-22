@@ -1,4 +1,4 @@
-import MediaRow from './MediaRow';
+import MediaRow from '../components/MediaRow';
 import { useMedia } from '../hooks/apiHooks';
 
 const Home = () => {
