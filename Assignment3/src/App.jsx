@@ -8,7 +8,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Login from './views/Login';
 import Logout from './views/Logout';
 import Profile from './views/Profile';
-
+import Upload from './views/Upload';
 const App = () => {
   return (
     <HashRouter>
@@ -20,7 +20,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
 
             <Route path="/logout" element={<Logout />} />
-
+<Route path="/upload" element={<Upload />} />
             <Route
               path="/profile"
               element={
