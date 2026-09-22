@@ -33,7 +33,40 @@ const useMedia = () => {
     getMedia();
   }, []);
 
-  return { mediaArray };
+  const postMedia = async (file, inputs, token) => {
+  const filename = file.name
+    .replace(/\s+/g, '-')
+    .replace(/[^a-zA-Z0-9.-]/g, '');
+
+  const mediaData = {
+    title: inputs.title,
+    description: inputs.description,
+    filename: filename,
+    filesize: file.size,
+    media_type: file.type,
+  };
+
+  const fetchOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(mediaData),
+  };
+
+  const result = await fetchData(
+    import.meta.env.VITE_MEDIA_API + '/media',
+    fetchOptions
+  );
+
+  return result;
+};
+
+  return {
+    mediaArray,
+    postMedia,
+  };
 };
 
 const useAuthentication = () => {
@@ -100,4 +133,31 @@ const useUser = () => {
   };
 };
 
-export { useMedia, useAuthentication, useUser };
+const useFile = () => {
+  const postFile = async (file, token) => {
+    const formData = new FormData();
+
+    formData.append('file', file);
+
+    const fetchOptions = {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    };
+
+    const result = await fetchData(
+  import.meta.env.VITE_UPLOAD_SERVER + '/upload',
+  fetchOptions
+);
+
+    return result;
+  };
+
+  return {
+    postFile,
+  };
+};
+
+export { useMedia, useAuthentication, useUser, useFile };
